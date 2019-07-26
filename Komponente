@@ -1,0 +1,77 @@
+---
+title: "Kompontnts"
+author: "Rosalie Arendt"
+date: "26 7 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r, echo = FALSE}
+if( !require(tidyverse)){
+  install.packages("tidyverse")
+}
+library(tidyverse)
+
+if( !require(knitr)){
+  install.packages("knitr")
+}
+library(knitr)
+if( !require(readxl)){
+  install.packages("readxl")
+}
+library(readxl)
+if( !require(data.table)){
+  install.packages("data.table")
+}
+library(data.table)
+```
+
+##import data for components
+```{r}
+
+
+
+Komponente1 <- fread(file.path( "Data","Komponente","Bestandteile_Komponente_K1BE1.csv"))
+Komponente2 <- fread(file.path( "Data","Komponente","Bestandteile_Komponente_K1BE2.csv"))
+Komponente3 <- fread(file.path( "Data","Komponente","Bestandteile_Komponente_K1DI1.csv"))
+Komponente4 <- fread(file.path( "Data","Komponente","Bestandteile_Komponente_K1DI2.csv"))
+Komponente5 <- fread(file.path( "Data","Komponente","Bestandteile_Komponente_K2LE1.csv"))
+Komponente6 <- fread(file.path( "Data","Komponente","Bestandteile_Komponente_K2LE2.csv"))
+Komponente7 <- fread(file.path( "Data","Komponente","Bestandteile_Komponente_K2ST1.csv"))
+Komponente8 <- fread(file.path( "Data","Komponente","Bestandteile_Komponente_K2ST2.csv"))
+Komponente9 <- fread(file.path( "Data","Komponente","Bestandteile_Komponente_K3AG1.csv"))
+
+
+```
+look at components data
+```{r}
+str(Komponente1)
+str(Komponente2)
+str(Komponente3)
+str(Komponente4)
+str(Komponente5)
+str(Komponente6)
+str(Komponente7)
+str(Komponente8)
+str(Komponente9)
+head(Komponente1)
+head(Komponente2)
+head(Komponente3)
+head(Komponente4)
+head(Komponente5)
+head(Komponente6)
+head(Komponente7)
+head(Komponente8)
+head(Komponente9)
+
+```
+hier habe ich jetzt auch erstmal nicht weiter manipuliert, da es unterschiedliche Anzahlen an Variablen gab und ich mir nicht sicher war, wie di Tabellen zusammengehören

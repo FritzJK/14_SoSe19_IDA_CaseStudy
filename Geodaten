@@ -1,0 +1,51 @@
+---
+title: "Geodaten"
+author: "Rosalie Arendt"
+date: "26 7 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## install packages
+
+```{r, echo = FALSE}
+if( !require(tidyverse)){
+  install.packages("tidyverse")
+}
+library(tidyverse)
+
+if( !require(knitr)){
+  install.packages("knitr")
+}
+library(knitr)
+if( !require(readxl)){
+  install.packages("readxl")
+}
+library(readxl)
+```
+
+## import data
+```{r}
+Geodaten_Gemeinden <- read_csv2(file.path("Geodaten", "Geodaten_Gemeinden_v1.2_2017-08-22_TrR.csv"))
+OEM_Werke_2017 <- read_csv2(file.path("Geodaten", "Geodaten_Gemeinden_v1.2_2017-08-22_TrR.csv"))
+Tier1_Werke_2017 <- read_csv2(file.path("Geodaten", "Tier1_Werke_2017-07-11_v1.2_TrR.csv"))
+Tier2_Werke_2017 <- read_csv2(file.path("Geodaten", "Tier2_Werke_2017-07-11_v1.2_TrR.csv"))
+Klimazonen_Köppen_Geiger <- read_excel(file.path("Geodaten","Klimazonen_Köppen_Geiger.xlsx"))
+
+
+```
+
+inspect data
+```{r}
+str(Geodaten_Gemeinden)
+head(Geodaten_Gemeinden)
+str(OEM_Werke_2017)
+head(OEM_Werke_2017)
+str(Tier1_Werke_2017)
+head(Tier1_Werke_2017)
+str(Tier2_Werke_2017)
+head(Tier1_Werke_2017)
+```

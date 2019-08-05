@@ -1,0 +1,147 @@
+---
+title: "Kompontnts"
+author: "Rosalie Arendt"
+date: "26 7 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r, echo = FALSE}
+if( !require(tidyverse)){
+  install.packages("tidyverse")
+}
+library(tidyverse)
+
+if( !require(knitr)){
+  install.packages("knitr")
+}
+library(knitr)
+if( !require(readxl)){
+  install.packages("readxl")
+}
+library(readxl)
+if( !require(data.table)){
+  install.packages("data.table")
+}
+library(data.table)
+```
+
+##import data for components
+```{r}
+
+
+
+Komponente1 <- fread(file.path( "Data","Komponente","Bestandteile_Komponente_K1BE1.csv"))
+Komponente2 <- fread(file.path( "Data","Komponente","Bestandteile_Komponente_K1BE2.csv"))
+Komponente3 <- fread(file.path( "Data","Komponente","Bestandteile_Komponente_K1DI1.csv"))
+Komponente4 <- fread(file.path( "Data","Komponente","Bestandteile_Komponente_K1DI2.csv"))
+Komponente5 <- fread(file.path( "Data","Komponente","Bestandteile_Komponente_K2LE1.csv"))
+Komponente6 <- fread(file.path( "Data","Komponente","Bestandteile_Komponente_K2LE2.csv"))
+Komponente7 <- fread(file.path( "Data","Komponente","Bestandteile_Komponente_K2ST1.csv"))
+Komponente8 <- fread(file.path( "Data","Komponente","Bestandteile_Komponente_K2ST2.csv"))
+Komponente9 <- fread(file.path( "Data","Komponente","Bestandteile_Komponente_K3AG1.csv"))
+
+
+```
+look at components data
+```{r}
+str(Komponente1)
+str(Komponente2)
+str(Komponente3)
+str(Komponente4)
+str(Komponente5)
+str(Komponente6)
+str(Komponente7)
+str(Komponente8)
+str(Komponente9)
+head(Komponente1)
+head(Komponente2)
+head(Komponente3)
+head(Komponente4)
+head(Komponente5)
+head(Komponente6)
+head(Komponente7)
+head(Komponente8)
+head(Komponente9)
+
+```
+create tidy dataset, by removing unnecessary column
+```{r}
+Komponente1 <- select(Komponente1, "V2", "V3","V4","V5","V6")
+Komponente1 <- gather(Komponente1, key = "part_type", value  = "Part", V2, V3, V4, V5)
+Komponente1 <- select(Komponente1, "V6", "Part", "part_type")
+Komponente1 <- select(Komponente1, "V6", "Part")
+
+Komponente2 <- select(Komponente2, "V2", "V3","V4","V5","V6")
+Komponente2 <- gather(Komponente2, key = "part_type",value = "Part", V2, V3, V4, V5)
+Komponente2 <- select(Komponente2, "V6", "Part","part_type")
+Komponente2 <- select(Komponente2, "V6", "Part")
+
+Komponente3 <- select(Komponente3, "V2", "V3","V4","V5","V6")
+Komponente3 <- gather(Komponente3,key = "part_type", value = "Part", V2, V3, V4, V5)
+Komponente3 <- select(Komponente3, "V6", "Part","part_type")
+Komponente3 <- select(Komponente3, "V6", "Part")
+    
+Komponente4 <- select(Komponente4, "V2", "V3","V4","V5","V6")
+Komponente4 <- gather(Komponente4,key = "part_type", value = "Part", V2, V3, V4, V5)
+Komponente4 <- select(Komponente4, "V6", "Part","part_type")
+Komponente4 <- select(Komponente4, "V6", "Part")
+
+Komponente5 <- select(Komponente5, "V2", "V3","V4","V5")
+Komponente5 <- gather(Komponente5, value = "Part", key = "part_type", V2, V3, V4)
+Komponente5 <- select(Komponente5, "V5", "Part","part_type")
+Komponente5 <- select(Komponente5, "V5", "Part")
+
+Komponente6 <- select(Komponente6, "V2", "V3","V4","V5")
+Komponente6 <- gather(Komponente6,key = "part_type", value = "Part", V2, V3, V4)
+Komponente6 <- select(Komponente6, "V5", "Part","part_type")
+Komponente6 <- select(Komponente6, "V5", "Part")
+
+Komponente7 <- select(Komponente7, "ID_T11", "ID_T12","ID_T13","ID_K2ST1")
+Komponente7 <- gather(Komponente7, key = "part_type",value = "Part", "ID_T11", "ID_T12","ID_T13" )
+Komponente7 <- select(Komponente7, "ID_K2ST1", "Part","part_type")
+Komponente7 <- select(Komponente7, "ID_K2ST1", "Part")
+
+Komponente8 <- select(Komponente8, "V2", "V3","V4","V5")
+Komponente8 <- gather(Komponente8, key = "part_type",value = "Part", V2, V3, V4)
+Komponente8 <- select(Komponente8, "V5", "Part","part_type")
+Komponente8 <- select(Komponente8, "V5", "Part")
+
+Komponente9 <- select(Komponente9, "ID_T21", "ID_T24","ID_T25","ID_K3AG1")
+Komponente9 <- gather(Komponente9,key = "part_type", value = "Part","ID_T21", "ID_T24","ID_T25" )
+Komponente9 <- select(Komponente9, "ID_K3AG1", "Part","part_type")
+Komponente9 <- select(Komponente9, "ID_K3AG1", "Part")  
+  
+
+```
+Bind all Komponents together rename first don't execute
+s and rename them to be able to use bind rows
+```{r}
+rename1 <- c("V6" = "Komponent_ID")
+rename2 <- c("V5" = "Komponent_ID")
+rename3 <- c("ID_K2ST1" = "Komponent_ID")
+rename4 <- c("ID_K3AG1" = "Komponent_ID")
+Komponente1 <- plyr::rename(Komponente1, rename1)
+Komponente2 <- plyr::rename(Komponente2, rename1)
+Komponente3 <- plyr::rename(Komponente3, rename1)
+Komponente4 <- plyr::rename(Komponente4, rename1)
+Komponente5 <- plyr::rename(Komponente5, rename2)
+Komponente6 <- plyr::rename(Komponente6, rename2)
+Komponente7 <- plyr::rename(Komponente7, rename3)
+Komponente8 <- plyr::rename(Komponente8, rename2)
+Komponente9 <- plyr::rename(Komponente9, rename4)
+
+```
+Now bind all components together
+```{r}
+Komponente_all <- bind_rows(Komponente1, Komponente2, Komponente3, Komponente4, Komponente5, Komponente6, Komponente7, Komponente8, Komponente9)
+```

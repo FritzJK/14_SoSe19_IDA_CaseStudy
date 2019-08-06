@@ -34,10 +34,18 @@ library(readr)
 
 
 ```{r}
+
+Einzelteil17 <- fread("~/Desktop/IDA 2019/Shared/Data/Einzelteil/Einzelteil_T17.csv", header=TRUE, sep=";", stringsAsFactors = FALSE)
+
+```
+
+
+```{r}
 Einzelteil4 <- fread("~/Desktop/IDA 2019/Shared/Data/Einzelteil/Einzelteil_T04.csv", header=TRUE, sep=";", stringsAsFactors = FALSE)
 Einzelteil4$Fehlerhaft_Datum<-as.Date(Einzelteil4$Fehlerhaft_Datum,format = "%Y-%m-%d")
 Einzelteil4$origin<-as.Date(Einzelteil4$origin,format = "%d-%m-%Y")
 Einzelteil4 <- transform(Einzelteil4, Produktionsdatum = Einzelteil4$Produktionsdatum_Origin_01011970 + Einzelteil4$origin)
+Einzelteil4 <- Einzelteil4[,-(9:10),drop=FALSE]
 ```
 
 ```{r}
@@ -56,6 +64,7 @@ Einzelteil6 <- fread("~/Desktop/IDA 2019/Shared/Data/Einzelteil/Einzelteil_T06.c
 Einzelteil6$Fehlerhaft_Datum<-as.Date(Einzelteil6$Fehlerhaft_Datum,format = "%Y-%m-%d")
 Einzelteil6$origin<-as.Date(Einzelteil6$origin,format = "%d-%m-%Y")
 Einzelteil6 <- transform(Einzelteil6, Produktionsdatum = Einzelteil6$Produktionsdatum_Origin_01011970 + Einzelteil6$origin)
+Einzelteil6 <- Einzelteil6[,-(9:10),drop=FALSE]
 ```
 
 ```{r}
@@ -63,6 +72,7 @@ Einzelteil8 <- fread("~/Desktop/IDA 2019/Shared/Data/Einzelteil/Einzelteil_T08.c
 Einzelteil8$Fehlerhaft_Datum<-as.Date(Einzelteil8$Fehlerhaft_Datum,format = "%Y-%m-%d")
 Einzelteil8$origin<-as.Date(Einzelteil8$origin,format = "%d-%m-%Y")
 Einzelteil8 <- transform(Einzelteil8, Produktionsdatum = Einzelteil8$Produktionsdatum_Origin_01011970 + Einzelteil8$origin)
+Einzelteil8 <- Einzelteil8[,-(9:10),drop=FALSE]
 ```
 
 ```{r}
@@ -70,6 +80,7 @@ Einzelteil10 <- fread("~/Desktop/IDA 2019/Shared/Data/Einzelteil/Einzelteil_T10.
 Einzelteil10$Fehlerhaft_Datum<-as.Date(Einzelteil10$Fehlerhaft_Datum,format = "%Y-%m-%d")
 Einzelteil10$origin<-as.Date(Einzelteil10$origin,format = "%d-%m-%Y")
 Einzelteil10 <- transform(Einzelteil10, Produktionsdatum = Einzelteil10$Produktionsdatum_Origin_01011970 + Einzelteil10$origin)
+Einzelteil10 <- Einzelteil10[,-(9:10),drop=FALSE]
 ```
 
 ```{r}
@@ -82,6 +93,7 @@ Einzelteil13 <- fread("~/Desktop/IDA 2019/Shared/Data/Einzelteil/Einzelteil_T13.
 Einzelteil13$Fehlerhaft_Datum<-as.Date(Einzelteil13$Fehlerhaft_Datum,format = "%Y-%m-%d")
 Einzelteil13$origin<-as.Date(Einzelteil13$origin,format = "%d-%m-%Y")
 Einzelteil13 <- transform(Einzelteil13, Produktionsdatum = Einzelteil13$Produktionsdatum_Origin_01011970 + Einzelteil13$origin)
+Einzelteil13 <- Einzelteil13[,-(9:10),drop=FALSE]
 ```
 
 ```{r}
@@ -89,7 +101,27 @@ Einzelteil14 <- fread("~/Desktop/IDA 2019/Shared/Data/Einzelteil/Einzelteil_T14.
 Einzelteil14$Fehlerhaft_Datum<-as.Date(Einzelteil14$Fehlerhaft_Datum,format = "%Y-%m-%d")
 Einzelteil14$origin<-as.Date(Einzelteil14$origin,format = "%d-%m-%Y")
 Einzelteil14 <- transform(Einzelteil14, Produktionsdatum = Einzelteil14$Produktionsdatum_Origin_01011970 + Einzelteil14$origin)
+Einzelteil14 <- Einzelteil14[,-(9:10),drop=FALSE]
 ```
+
+```{r}
+Einzelteil18 <- fread("~/Desktop/IDA 2019/Shared/Data/Einzelteil/Einzelteil_T18.csv", header=TRUE, sep=";", stringsAsFactors = FALSE)
+Einzelteil18$Fehlerhaft_Datum<-as.Date(Einzelteil18$Fehlerhaft_Datum,format = "%Y-%m-%d")
+Einzelteil18$origin<-as.Date(Einzelteil18$origin,format = "%d-%m-%Y")
+Einzelteil18 <- transform(Einzelteil18, Produktionsdatum = Einzelteil18$Produktionsdatum_Origin_01011970 + Einzelteil18$origin)
+Einzelteil18 <- Einzelteil18[,-(9:10),drop=FALSE]
+```
+
+
+```{r}
+Einzelteil19 <- fread("~/Desktop/IDA 2019/Shared/Data/Einzelteil/Einzelteil_T19.csv", header=TRUE, sep=",", stringsAsFactors = FALSE)
+Einzelteil19$Fehlerhaft_Datum<-as.Date(Einzelteil19$Fehlerhaft_Datum,format = "%Y-%m-%d")
+Einzelteil19$origin<-as.Date(Einzelteil19$origin,format = "%d-%m-%Y")
+Einzelteil19$origin<-as.Date(Einzelteil19$origin,format = "%d-%m-%Y")
+Einzelteil19 <- transform(Einzelteil19, Produktionsdatum = Einzelteil19$Produktionsdatum_Origin_01011970 + Einzelteil19$origin)
+Einzelteil19 <- Einzelteil19[,-(9:10),drop=FALSE]
+```
+
 
 ```{r}
 Einzelteil15 <- fread("~/Desktop/IDA 2019/Shared/Data/Einzelteil/Einzelteil_T15.csv", header=TRUE, sep=";", stringsAsFactors = FALSE)
@@ -102,28 +134,6 @@ Einzelteil15 <- unite(Einzelteil15, ID_T15,ID_T15.x, ID_T15.y, sep = "_", remove
 Einzelteil15 <- unite(Einzelteil15, Fehlerhaft_Fahrleistung,Fehlerhaft_Fahrleistung.x, Fehlerhaft_Fahrleistung.y, sep = "_", remove = TRUE)
 ```
 
-```{r}
-
-Einzelteil17 <- fread("~/Desktop/IDA 2019/Shared/Data/Einzelteil/Einzelteil_T17.csv", header=TRUE, sep=";", stringsAsFactors = FALSE)
-
-```
-
-
-```{r}
-Einzelteil18 <- fread("~/Desktop/IDA 2019/Shared/Data/Einzelteil/Einzelteil_T18.csv", header=TRUE, sep=";", stringsAsFactors = FALSE)
-Einzelteil18$Fehlerhaft_Datum<-as.Date(Einzelteil18$Fehlerhaft_Datum,format = "%Y-%m-%d")
-Einzelteil18$origin<-as.Date(Einzelteil18$origin,format = "%d-%m-%Y")
-Einzelteil18 <- transform(Einzelteil18, Produktionsdatum = Einzelteil18$Produktionsdatum_Origin_01011970 + Einzelteil18$origin)
-```
-
-
-```{r}
-Einzelteil19 <- fread("~/Desktop/IDA 2019/Shared/Data/Einzelteil/Einzelteil_T19.csv", header=TRUE, sep=",", stringsAsFactors = FALSE)
-Einzelteil19$Fehlerhaft_Datum<-as.Date(Einzelteil19$Fehlerhaft_Datum,format = "%Y-%m-%d")
-Einzelteil19$origin<-as.Date(Einzelteil19$origin,format = "%d-%m-%Y")
-Einzelteil19$origin<-as.Date(Einzelteil19$origin,format = "%d-%m-%Y")
-Einzelteil19 <- transform(Einzelteil19, Produktionsdatum = Einzelteil19$Produktionsdatum_Origin_01011970 + Einzelteil19$origin)
-```
 
 
 

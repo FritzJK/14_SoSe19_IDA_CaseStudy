@@ -1,0 +1,127 @@
+---
+title: "Rosalie_case_study"
+author: "Rosalie Arendt"
+date: "26 7 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+#include neessary packages tidyverse and knitr
+
+```{r cars}
+if( !require(tidyverse)){
+  install.packages("tidyverse")
+}
+library(tidyverse)
+
+if( !require(knitr)){
+  install.packages("knitr")
+}
+library(knitr)
+```
+
+#import necessary data
+
+```{r pressure}
+Bestandteile_Fahrzeuge_OEM1_Typ11 <- read_csv2(file.path("Data", "Fahrzeug", "Bestandteile_Fahrzeuge_OEM1_Typ11.csv"))
+Bestandteile_Fahrzeuge_OEM1_Typ12 <- read_csv2(file.path("Data", "Fahrzeug", "Bestandteile_Fahrzeuge_OEM1_Typ12.csv"))
+Bestandteile_Fahrzeuge_OEM2_Typ21 <- read_csv2(file.path("Data", "Fahrzeug", "Bestandteile_Fahrzeuge_OEM2_Typ21.csv"))
+Bestandteile_Fahrzeuge_OEM2_Typ22 <- read_csv2(file.path("Data", "Fahrzeug", "Bestandteile_Fahrzeuge_OEM2_Typ22.csv"))
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+str(Bestandteile_Fahrzeuge_OEM1_Typ11)
+head(Bestandteile_Fahrzeuge_OEM1_Typ11)
+str(Bestandteile_Fahrzeuge_OEM1_Typ12)
+head(Bestandteile_Fahrzeuge_OEM1_Typ12)
+str(Bestandteile_Fahrzeuge_OEM2_Typ21)
+head(Bestandteile_Fahrzeuge_OEM2_Typ21)
+str(Bestandteile_Fahrzeuge_OEM2_Typ22)
+head(Bestandteile_Fahrzeuge_OEM2_Typ22)
+```
+The OEM and type are part of the vehicle ID first two digits are the ID than the OEM, so that the seperate files do not contain additional information an can be merged; the origin of the data is contained in Fahrzeug ID
+```{r}
+Bestandteile_Fahrzeuge <- bind_rows(Bestandteile_Fahrzeuge_OEM1_Typ11, Bestandteile_Fahrzeuge_OEM1_Typ12, Bestandteile_Fahrzeuge_OEM2_Typ21, Bestandteile_Fahrzeuge_OEM2_Typ22)
+```
+inspect result
+```{r}
+str(Bestandteile_Fahrzeuge)
+head(Bestandteile_Fahrzeuge)
+Bestandteile_Fahrzeuge <- select(Bestandteile_Fahrzeuge, "ID_Karosserie", "ID_Schaltung", "ID_Sitze", "ID_Motor", "ID_Fahrzeug")
+Bestandteile_Fahrzeuge <- gather(Bestandteile_Fahrzeuge, key= "Komponent type", value = "Komponenten_ID", -"ID_Fahrzeug")
+Bestandteile_Fahrzeuge <- select(Bestandteile_Fahrzeuge, "ID_Fahrzeug", "Komponenten_ID")
+
+```
+Now I import the different cars, since they seem to be a different data type than the component lists of the vehicles
+
+```{r}
+Fahrzeuge_OEM1_Typ11 <- read_csv(file.path("Data", "Fahrzeug", "Fahrzeuge_OEM1_Typ11.csv"))
+Fahrzeuge_OEM1_Typ12 <- read_csv2(file.path("Data", "Fahrzeug", "Fahrzeuge_OEM1_Typ12.csv"))
+Fahrzeuge_OEM2_Typ21 <- read_csv(file.path("Data", "Fahrzeug", "Fahrzeuge_OEM2_Typ21.csv"))
+Fahrzeuge_OEM2_Typ22 <- read_csv2(file.path("Data", "Fahrzeug", "Fahrzeuge_OEM2_Typ22.csv"))
+```
+I inspect the result
+```{r}
+str(Fahrzeuge_OEM1_Typ11)
+head(Fahrzeuge_OEM1_Typ11)
+str(Fahrzeuge_OEM1_Typ12)
+head(Fahrzeuge_OEM1_Typ12)
+str(Fahrzeuge_OEM2_Typ21)
+head(Fahrzeuge_OEM2_Typ21)
+str(Fahrzeuge_OEM2_Typ22)
+head(Fahrzeuge_OEM2_Typ22)
+```
+
+results are not similar, i try to convert the dateformats for last two datasets to "POSIXct" and then to dataframes to bind them to the respective datasets
+
+```{r}
+Dates3rddataset <- as.Date(as.POSIXct(origin = "1970-01-01", (Fahrzeuge_OEM2_Typ21$Produktionsdatum_Origin_01011970)*86400))
+Dates4rddataset <- as.Date(as.POSIXct(origin = "1970-01-01", (Fahrzeuge_OEM2_Typ22$Produktionsdatum_Origin_01011970)*86400))
+str(Dates3rddataset)
+str(Dates4rddataset)
+Production_date3 <- as.data.frame(Dates3rddataset)
+Production_date4 <- as.data.frame(Dates4rddataset)
+```
+```{r}
+Fahrzeuge_OEM2_Typ21 <- bind_cols(Fahrzeuge_OEM2_Typ21, Production_date3)
+Fahrzeuge_OEM2_Typ22 <- bind_cols(Fahrzeuge_OEM2_Typ22, Production_date4)
+
+
+```
+now remove all unnecessary columns 
+``` {r}
+
+Fahrzeuge_OEM1_Typ11<- select(Fahrzeuge_OEM1_Typ11, "ID_Fahrzeug", "Produktionsdatum", "Herstellernummer", "Werksnummer", "Fehlerhaft", "Fehlerhaft_Datum", "Fehlerhaft_Fahrleistung")
+Fahrzeuge_OEM1_Typ12<- select(Fahrzeuge_OEM1_Typ12, "ID_Fahrzeug", "Produktionsdatum", "Herstellernummer", "Werksnummer", "Fehlerhaft", "Fehlerhaft_Datum", "Fehlerhaft_Fahrleistung")
+Fahrzeuge_OEM2_Typ21 <- select(Fahrzeuge_OEM2_Typ21, "ID_Fahrzeug", "Dates3rddataset", "Herstellernummer", "Werksnummer", "Fehlerhaft", "Fehlerhaft_Datum", "Fehlerhaft_Fahrleistung")
+Fahrzeuge_OEM2_Typ22 <- select(Fahrzeuge_OEM2_Typ22, "ID_Fahrzeug", "Dates4rddataset", "Herstellernummer", "Werksnummer", "Fehlerhaft", "Fehlerhaft_Datum", "Fehlerhaft_Fahrleistung")
+```
+rename columns and bind remaining data together
+
+``` {r}
+rename1 <- c("Dates3rddataset" = "Produktionsdatum")
+rename2 <- c("Dates4rddataset" = "Produktionsdatum")
+
+Fahrzeuge_OEM2_Typ21 <- plyr::rename(Fahrzeuge_OEM2_Typ21, rename1)
+Fahrzeuge_OEM2_Typ22 <- plyr::rename(Fahrzeuge_OEM2_Typ22, rename2)
+Fahrzeuge_all <- bind_rows(Fahrzeuge_OEM1_Typ11, Fahrzeuge_OEM1_Typ12, Fahrzeuge_OEM2_Typ21, Fahrzeuge_OEM2_Typ22)
+
+```
+
+``` {r}
+Fahrzeuge_OEM2_Typ21
+```
+```{r}
+Fahrzeuge_Bestandteile <- inner_join(Bestandteile_Fahrzeuge, Fahrzeuge_all, key = "ID_Fahrzeug" )
+
+```
+
+```{r}
+head(Fahrzeuge_Bestandteile)
+````

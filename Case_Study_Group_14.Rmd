@@ -38,6 +38,8 @@ if (!require(rebus)) {
 ```{r Importing Data, echo=FALSE}
 
 Einzelteil_T21<-read_csv2("Data/Einzelteil/Einzelteil_T21.csv")%>% select(-X1, -X1_1) %>% rename(Produktionsdatum_Origin=Produktionsdatum_Origin_01011970)
+Einzelteil_T21$origin<-as.Date(Einzelteil_T21$origin,format = "%d-%m-%Y")
+Einzelteil_T21<- mutate(Einzelteil_T21,Produktionsdatum = (origin+Produktionsdatum_Origin))%>% select(c(-Produktionsdatum_Origin,-origin))
 
 
 Einzelteil_T23<-read_csv2("Data/Einzelteil/Einzelteil_T23.csv")%>% select(-X1, -X1_1,-ID_T23.y,-Produktionsdatum.y,-Herstellernummer.y,-Werksnummer.y,-Fehlerhaft.y,-Fehlerhaft_Datum.y,-Fehlerhaft_Fahrleistung.y) %>% select(1,3,4,5,6,7,2) %>% rename(ID_T23=ID_T23.x,Herstellernummer=Herstellernummer.x,Werksnummer=Werksnummer.x,Fehlerhaft=Fehlerhaft.x,Fehlerhaft_Datum=Fehlerhaft_Datum.x,Fehlerhaft_Fahrleistung=Fehlerhaft_Fahrleistung.x,Produktionsdatum=Produktionsdatum.x)
@@ -45,8 +47,14 @@ Einzelteil_T23<-Einzelteil_T23[!is.na(Einzelteil_T23$ID_T23),]
 
 
 Einzelteil_T25<-read_csv("Data/Einzelteil/Einzelteil_T25.csv")%>% select(-X1, -X1_1)%>% rename(Produktionsdatum_Origin=Produktionsdatum_Origin_01011970)
+Einzelteil_T25$origin<-as.Date(Einzelteil_T25$origin,format = "%d-%m-%Y")
+Einzelteil_T25<- mutate(Einzelteil_T25,Produktionsdatum = (origin+Produktionsdatum_Origin))%>% select(c(-Produktionsdatum_Origin,-origin))
 
+  
 Einzelteil_T26<-read_csv2("Data/Einzelteil/Einzelteil_T26.csv")%>% select(-X1, -X1_1)%>% rename(Produktionsdatum_Origin=Produktionsdatum_Origin_01011970)
+Einzelteil_T26$origin<-as.Date(Einzelteil_T26$origin,format = "%d-%m-%Y")
+Einzelteil_T26<- mutate(Einzelteil_T26,Produktionsdatum = (origin+Produktionsdatum_Origin))%>% select(c(-Produktionsdatum_Origin,-origin))
+
 
 Einzelteil_T30<-read_csv("Data/Einzelteil/Einzelteil_T30.csv")%>% select(3,5,6,7,8,9,4) %>% rename(ID_T30=ID_T30.x,Herstellernummer=Herstellernummer.x,Werksnummer=Werksnummer.x,Fehlerhaft=Fehlerhaft.x,Fehlerhaft_Datum=Fehlerhaft_Datum.x,Fehlerhaft_Fahrleistung=Fehlerhaft_Fahrleistung.x,Produktionsdatum=Produktionsdatum.x)
 Einzelteil_T30<-Einzelteil_T30[!is.na(Einzelteil_T30$ID_T30),]
@@ -57,23 +65,33 @@ Einzelteil_T32<-Einzelteil_T23[!is.na(Einzelteil_T32$ID_T32),]
 
 
 Einzelteil_T33<-read_csv("Data/Einzelteil/Einzelteil_T33.csv")%>% select(-X1, -X1_1)%>% rename(Produktionsdatum_Origin=Produktionsdatum_Origin_01011970)
+Einzelteil_T33$origin<-as.Date(Einzelteil_T33$origin,format = "%d-%m-%Y")
+Einzelteil_T33<- mutate(Einzelteil_T33,Produktionsdatum = (origin+Produktionsdatum_Origin))%>% select(c(-Produktionsdatum_Origin,-origin))
+
 
 
 Einzelteil_T37<-read_csv("Data/Einzelteil/Einzelteil_T37.csv")%>% select(-X1, -X1_1)%>% rename(Produktionsdatum_Origin=Produktionsdatum_Origin_01011970)
+Einzelteil_T37$origin<-as.Date(Einzelteil_T37$origin,format = "%d-%m-%Y")
+Einzelteil_T37<- mutate(Einzelteil_T37,Produktionsdatum = (origin+Produktionsdatum_Origin))%>% select(c(-Produktionsdatum_Origin,-origin))
+
+
 
 Einzelteil_T38<-read_csv("Data/Einzelteil/Einzelteil_T38.csv")%>% select(-X1, -X1_1)%>% select(1,3,4,5,6,7,2)%>% rename(ID_T38=ID_T38.x,Herstellernummer=Herstellernummer.x,Werksnummer=Werksnummer.x,Fehlerhaft=Fehlerhaft.x,Fehlerhaft_Datum=Fehlerhaft_Datum.x,Fehlerhaft_Fahrleistung=Fehlerhaft_Fahrleistung.x,Produktionsdatum=Produktionsdatum.x)
 Einzelteil_T38<-Einzelteil_T38[!is.na(Einzelteil_T38$ID_T38),]
 
 
 Einzelteil_T40<-read_csv2("Data/Einzelteil/Einzelteil_T40.csv")%>% select(-X1, -X1_1)%>% rename(Produktionsdatum_Origin=Produktionsdatum_Origin_01011970)
+Einzelteil_T40$origin<-as.Date(Einzelteil_T40$origin,format = "%d-%m-%Y")
+Einzelteil_T40<- mutate(Einzelteil_T40,Produktionsdatum = (origin+Produktionsdatum_Origin))%>% select(c(-Produktionsdatum_Origin,-origin))
   
 
-Einzelteil_T39<-read_file('Data/Einzelteil/Einzelteil_T39.txt') %>% str_replace_all(pattern = '"',replacement = "")%>% str_split(pattern='\a') %>% T36 <-  %>% separate(col=1,sep = "\\\\",into=c('X','X1','ID_T39','Produktionsdatum','Herstellernummer','Werksnummer','Fehlerhaft','Fehlerhaft_Datum','Fehlerhaft_Fahrleistung')) %>% select(3:9)
-Einzelteil_T39<-Einzelteil_T39[-1,]
-Einzelteil_T39[,c(3,4,5,7)]<-sapply(Einzelteil_T39[,c(3,4,5,7)],as.numeric)
-Einzelteil_T39$Fehlerhaft_Datum<-as.Date(Einzelteil_T39$Fehlerhaft_Datum,format = "%Y-%m-%d")
-Einzelteil_T39$Produktionsdatum<-as.Date(Einzelteil_T39$Produktionsdatum,format = "%Y-%m-%d")
-Einzelteil_T39<-Einzelteil_T39[!is.na(Einzelteil_T39$Produktionsdatum),]
+#Einzelteil_T39<-read_file('Data/Einzelteil/Einzelteil_T39.txt') %>% str_replace_all(pattern = '"',replacement = "")%>% str_split(pattern='\a')
+#Einzelteil_T39<-separate(Einzelteil_T39 ,col=1,sep = "\\\\",into=c('X','X1','ID_T39','Produktionsdatum','Herstellernummer','Werksnummer','Fehlerhaft','Fehlerhaft_Datum','Fehlerhaft_Fahrleistung')) %>% select(3:9)
+#Einzelteil_T39<-Einzelteil_T39[-1,]
+#Einzelteil_T39[,c(3,4,5,7)]<-sapply(Einzelteil_T39[,c(3,4,5,7)],as.numeric)
+#Einzelteil_T39$Fehlerhaft_Datum<-as.Date(Einzelteil_T39$Fehlerhaft_Datum,format = "%Y-%m-%d")
+#Einzelteil_T39$Produktionsdatum<-as.Date(Einzelteil_T39$Produktionsdatum,format = "%Y-%m-%d")
+#Einzelteil_T39<-Einzelteil_T39[!is.na(Einzelteil_T39$Produktionsdatum),]
 
 
 Einzelteil_T36<-read_file('Data/Einzelteil/Einzelteil_T36.txt')
@@ -88,6 +106,8 @@ Einzelteil_T36$Origin <- str_remove_all(Einzelteil_T36$Origin,"\"")
 Einzelteil_T36$ID_T36 <- str_remove_all(Einzelteil_T36$ID_T36,"\"")
 Einzelteil_T36$Fehlerhaft_Datum<-as.Date(Einzelteil_T36$Fehlerhaft_Datum,format = "%Y-%m-%d")
 Einzelteil_T36[,c(2,3,4,6,7)]<-sapply(Einzelteil_T36[,c(2,3,4,6,7)],as.numeric)
+Einzelteil_T36$Origin<-as.Date(Einzelteil_T36$Origin,format = "%d-%m-%Y")
+Einzelteil_T36<- mutate(Einzelteil_T36,Produktionsdatum = (Origin+Produktionsdatum_Origin))%>% select(c(-Produktionsdatum_Origin,-Origin))
 
 
 Einzelteil_T34<-read_file('Data/Einzelteil/Einzelteil_T34.txt')
@@ -103,6 +123,8 @@ Einzelteil_T34$Werksnummer <- str_remove_all(Einzelteil_T34$Werksnummer,"\"")
 Einzelteil_T34$Origin <- str_remove_all(Einzelteil_T34$Origin,"\"")
 Einzelteil_T34[,c(2,3,4,6,7)]<-sapply(Einzelteil_T34[,c(2,3,4,6,7)],as.numeric)
 Einzelteil_T34$Fehlerhaft_Datum<-as.Date(Einzelteil_T34$Fehlerhaft_Datum,format = "%Y-%m-%d")
+Einzelteil_T34$Origin<-as.Date(Einzelteil_T34$Origin,format = "%d-%m-%Y")
+Einzelteil_T34<- mutate(Einzelteil_T34,Produktionsdatum = (Origin+Produktionsdatum_Origin))%>% select(c(-Produktionsdatum_Origin,-Origin))
 
 
 Einzelteil_T31<-read_file('Data/Einzelteil/Einzelteil_T31.txt')
@@ -118,6 +140,8 @@ Einzelteil_T31$ID_T31 <- str_remove_all(Einzelteil_T31$ID_T31,"\"")
 Einzelteil_T31$Fehlerhaft_Datum<-as.Date(Einzelteil_T31$Fehlerhaft_Datum,format = "%Y-%m-%d")
 Einzelteil_T31[,c(2,3,4,6,7)]<-sapply(Einzelteil_T31[,c(2,3,4,6,7)],as.numeric)
 Einzelteil_T31<-Einzelteil_T31[!is.na(Einzelteil_T31$ID_T31),]
+Einzelteil_T31$Origin<-as.Date(Einzelteil_T31$Origin,format = "%d-%m-%Y")
+Einzelteil_T31<- mutate(Einzelteil_T31,Produktionsdatum = (Origin+Produktionsdatum_Origin))%>% select(c(-Produktionsdatum_Origin,-Origin))
 
 
 Einzelteil_T27<-read_file('Data/Einzelteil/Einzelteil_T27.txt')
@@ -134,7 +158,8 @@ Einzelteil_T27$origin <- str_remove_all(Einzelteil_T27$origin,"\"")
 Einzelteil_T27$Werksnummer <- str_remove_all(Einzelteil_T27$Werksnummer,"\"")
 Einzelteil_T27[,c(2,3,4,6,7)]<-sapply(Einzelteil_T27[,c(2,3,4,6,7)],as.numeric)
 Einzelteil_T27$Fehlerhaft_Datum<-as.Date(Einzelteil_T27$Fehlerhaft_Datum,format = "%Y-%m-%d")
-
+Einzelteil_T27$origin <- as.Date(Einzelteil_T27$origin,format = "%d-%m-%Y")
+Einzelteil_T27<- mutate(Einzelteil_T27,Produktionsdatum = (origin+Produktionsdatum_Origin))%>% select(c(-Produktionsdatum_Origin,-origin))
 
 
 Einzelteil_T24<-read_file('Data/Einzelteil/Einzelteil_T24.txt')
@@ -179,6 +204,10 @@ Einzelteil_T35$Fehlerhaft_Datum<-as.Date(Einzelteil_T35$Fehlerhaft_Datum,format 
 Einzelteil_T35$Produktionsdatum<-as.Date(Einzelteil_T35$Produktionsdatum,format = "%Y-%m-%d")
 Einzelteil_T35<-select(Einzelteil_T35,1,3,4,5,6,7,2)
 Einzelteil_T35[,c(2,3,4,6)]<-sapply(Einzelteil_T35[,c(2,3,4,6)],as.numeric)
+
+
+
+
 ```
 
 

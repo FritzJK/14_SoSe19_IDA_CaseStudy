@@ -123,16 +123,6 @@ Einzelteil19 <- Einzelteil19[,-(9:10),drop=FALSE]
 ```
 
 
-```{r}
-Einzelteil15 <- fread("~/Desktop/IDA 2019/Shared/Data/Einzelteil/Einzelteil_T15.csv", header=TRUE, sep=";", stringsAsFactors = FALSE)
-Einzelteil15 <- unite(Einzelteil15, Produktionsdatum,Produktionsdatum.x, Produktionsdatum.y, sep = "_", remove = TRUE)
-Einzelteil15 <- unite(Einzelteil15, Herstellernummer,Herstellernummer.x, Herstellernummer.y, sep = "_", remove = TRUE)
-Einzelteil15 <- unite(Einzelteil15, Werksnummer,Werksnummer.x, Werksnummer.y, sep = "_", remove = TRUE)
-Einzelteil15 <- unite(Einzelteil15, Fehlerhaft,Fehlerhaft.x, Fehlerhaft.y, sep = "_", remove = TRUE)
-Einzelteil15 <- unite(Einzelteil15, Fehlerhaft_Datum,Fehlerhaft_Datum.x, Fehlerhaft_Datum.y, sep = "_", remove = TRUE)
-Einzelteil15 <- unite(Einzelteil15, ID_T15,ID_T15.x, ID_T15.y, sep = "_", remove = TRUE)
-Einzelteil15 <- unite(Einzelteil15, Fehlerhaft_Fahrleistung,Fehlerhaft_Fahrleistung.x, Fehlerhaft_Fahrleistung.y, sep = "_", remove = TRUE)
-```
 
 
 

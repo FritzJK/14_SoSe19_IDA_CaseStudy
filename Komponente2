@@ -1,0 +1,153 @@
+---
+title: "Komponente"
+author: "Fritz"
+date: "8 8 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+```{r}
+if (!require(data.table)) {
+  install.packages("data.table")
+  require(readxl)
+}
+if (!require(readr)) {
+  install.packages("readr")
+  require(readxl)
+}
+if (!require(dplyr)) {
+  install.packages("dplyr")
+  require(readxl)
+}
+if (!require(tidyr)) {
+  install.packages("tidyr")
+  require(readxl)
+}
+if (!require(purrr)) {
+  install.packages("purrr")
+  require(readxl)
+}
+if (!require(stringr)) {
+  install.packages("stringr")
+  require(readxl)
+}
+if (!require(rebus)) {
+  install.packages("rebus")
+  require(readxl)
+}
+
+Komponente10 <- fread("Bestandteile_Komponente_K1BE1.csv")
+head(Komponente10)
+
+Komponente11 <- fread("Bestandteile_Komponente_K1BE2.csv")
+head(Komponente11)
+
+Komponente12 <- fread("Bestandteile_Komponente_K1DI1.csv")
+head(Komponente12)
+
+Komponente13 <- fread("Bestandteile_Komponente_K1DI2.csv")
+head(Komponente13)
+
+Komponente14 <- fread("Bestandteile_Komponente_K2LE1.csv")
+head(Komponente14)
+
+Komponente15 <- fread("Bestandteile_Komponente_K2LE2.csv")
+head(Komponente15)
+
+Komponente16 <- fread("Bestandteile_Komponente_K2ST1.csv")
+head(Komponente16)
+
+Komponente17 <- fread("Bestandteile_Komponente_K2ST2.csv")
+head(Komponente17)
+
+Komponente18 <- fread("Bestandteile_Komponente_K3AG1.csv")
+head(Komponente18)
+
+Komponente19 <- fread("Bestandteile_Komponente_K3AG2.csv")
+head(Komponente19)
+
+Komponente20 <- fread("Bestandteile_Komponente_K3SG1.csv")
+head(Komponente20)
+
+Komponente21 <- fread("Bestandteile_Komponente_K3SG2.csv")
+head(Komponente21)
+
+Komponente22 <- fread("Bestandteile_Komponente_K4.csv")
+head(Komponente22)
+
+Komponente23 <- fread("Bestandteile_Komponente_K5.csv")
+head(Komponente23)
+
+Komponente24 <- fread("Bestandteile_Komponente_K6.csv")
+head(Komponente24)
+
+Komponente25 <- fread("Bestandteile_Komponente_K7.csv")
+head(Komponente25)
+
+Komponente26 <- fread("Komponente_K1BE1.csv")
+head(Komponente26)
+
+Komponente27 <- fread("Komponente_K1BE2.csv")
+head(Komponente27)
+
+Komponente28 <- fread("Komponente_K1DI1.csv")
+head(Komponente28)
+
+Komponente29 <- read_file("Komponente_K1DI2.txt")
+Komponente29<-str_split(Komponente29,pattern="\\\"[0-9]+\"\\\\[0-9]+\\\\\\\"")
+Komponente29 <- data.frame(Komponente29)
+head(Komponente29)
+
+Komponente30 <-read_file("Komponente_K2LE1.txt")
+Komponente30<-str_split(Komponente30, pattern="")
+Komponente30<-data.frame(Komponente30)
+Komponente30<-separate(Komponente30, col = 1, sep = "II", into = c("X1","ID_Sitze.x","Produktionsdatum.x","Herstellernummer.x","Werksnummer.x","Fehlerhaft.x","Fehlerhaft_Datum.x","Fehlerhaft_Fahrleistung.x","ID_Sitze.y","Produktionsdatum.y","Herstellernummer.y","Werksnummer.y","Fehlerhaft.y","Fehlerhaft_Datum.y","Fehlerhaft_Fahrleistung.y"))
+head(Komponente30)
+
+Komponente31 <- read_file("Komponente_K2LE2.txt")
+Komponente31<-str_split(Komponente31,pattern="\\\"[0-9]+\"\\\\[0-9]+\\\\\\\"")
+Komponente31 <- data.frame(Komponente31)
+head(Komponente31)
+
+Komponente32 <- fread("Komponente_K2ST1.txt")
+head(Komponente32)
+
+Komponente33 <- fread("Komponente_K2ST2.csv")
+head(Komponente33)
+
+Komponente34 <- fread("Komponente_K3AG1.csv")
+head(Komponente34)
+
+Komponente35 <- read_file("Komponente_K3AG2.txt")
+Komponente35 <- str_split(Komponente35,pattern="\\\"[0-9]+\"\\\\[0-9]+\\\\\\\"")
+Komponente35 <- data.frame(Komponente35)
+head(Komponente35)
+
+Komponente36 <- fread("Komponente_K3SG1.csv")
+head(Komponente36)
+
+Komponente37 <- fread("Komponente_K3SG2.csv")
+head(Komponente37)
+
+Komponente38 <- fread("Komponente_K4.csv")
+head(Komponente38)
+
+Komponente39 <- fread("Komponente_K5.csv")
+head(Komponente39)
+
+Komponente40 <- fread("Komponente_K6.csv")
+head(Komponente40)
+
+Komponente41 <- fread("Komponente_K7.txt")
+head(Komponente41)
+
+Zulassung <- fread("Zulassungen_alle_Fahrzeuge.csv")
+```
